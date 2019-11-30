@@ -7,14 +7,15 @@ public class Profile {
     private String name;
     private String email;
     private String password;
+    private String bio;
     private ArrayList<String> preferences;
 
-    public Profile(String username, String name, String email, String password, ArrayList<String> preferences) {
+    public Profile(String username, String name, String email, String password) {
         this.username = username;
         this.name = name;
         this.email = email;
         this.password = password;
-        this.preferences = preferences;
+        this.preferences = new ArrayList<>();
     }
 
     public void setUsername(String username) {
@@ -33,16 +34,8 @@ public class Profile {
         this.password = password;
     }
 
-    public void addPreference(String foodType) {
-        this.preferences.add(foodType);
-    }
-
-    public void clearPreferences() {
-        this.preferences.clear();
-    }
-
-    public void removePreference(String foodType) {
-        this.preferences.remove(foodType);
+    public void setBio(String bio) {
+        this.bio = bio;
     }
 
     public String getUsername() {
@@ -57,8 +50,14 @@ public class Profile {
         return this.email;
     }
 
+    public String getBio() {
+        return this.bio;
+    }
+
     public ArrayList<String> getPreferences() {
         return this.preferences;
     }
+
+
 
 }
