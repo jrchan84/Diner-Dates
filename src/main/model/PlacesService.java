@@ -28,7 +28,7 @@ public class PlacesService {
     private static final String OUT_JSON = "/json";
 
     // KEY!
-    private static final String API_KEY = "AIzaSyDS0njSohNwK3hJ0D5pRLmUkJQQTWGuXSM";
+    private static final String API_KEY = "AIzaSyCqY6ZWUzNOksYLI0c3FBdOYU4xEDIVorc";
 
     public static ArrayList<Place> autocomplete(String input) {
         ArrayList<Place> resultList = null;
@@ -36,14 +36,12 @@ public class PlacesService {
         HttpURLConnection conn = null;
         StringBuilder jsonResults = new StringBuilder();
         try {
-            StringBuilder sb = new StringBuilder(PLACES_API_BASE);
-            sb.append(TYPE_AUTOCOMPLETE);
-            sb.append(OUT_JSON);
-            sb.append("?sensor=false");
-            sb.append("&key=" + API_KEY);
-            sb.append("&input=" + URLEncoder.encode(input, "utf8"));
-
-            URL url = new URL(sb.toString());
+            String sb = PLACES_API_BASE + TYPE_AUTOCOMPLETE +
+                    OUT_JSON +
+                    "?sensor=false" +
+                    "&key=" + API_KEY +
+                    "&input=" + URLEncoder.encode(input, "utf8");
+            URL url = new URL(sb);
             conn = (HttpURLConnection) url.openConnection();
             InputStreamReader in = new InputStreamReader(conn.getInputStream());
 
@@ -70,7 +68,7 @@ public class PlacesService {
             JSONArray predsJsonArray = jsonObj.getJSONArray("predictions");
 
             // Extract the Place descriptions from the results
-            resultList = new ArrayList<Place>(predsJsonArray.length());
+            resultList = new ArrayList<>(predsJsonArray.length());
             for (int i = 0; i < predsJsonArray.length(); i++) {
                 Place place = new Place();
                 place.reference = predsJsonArray.getJSONObject(i).getString("reference");
@@ -86,23 +84,19 @@ public class PlacesService {
 
     public static ArrayList<Place> search(String keyword, double lat, double lng, int radius) {
         ArrayList<Place> resultList = null;
-
         HttpURLConnection conn = null;
         StringBuilder jsonResults = new StringBuilder();
         try {
-            StringBuilder sb = new StringBuilder(PLACES_API_BASE);
-            sb.append(TYPE_SEARCH);
-            sb.append(OUT_JSON);
-            sb.append("?sensor=false");
-            sb.append("&key=" + API_KEY);
-            sb.append("&keyword=" + URLEncoder.encode(keyword, "utf8"));
-            sb.append("&location=" + String.valueOf(lat) + "," + String.valueOf(lng));
-            sb.append("&radius=" + String.valueOf(radius));
-
-            URL url = new URL(sb.toString());
+            String sb = PLACES_API_BASE + TYPE_SEARCH +
+                    OUT_JSON +
+                    "?sensor=false" +
+                    "&key=" + API_KEY +
+                    "&keyword=" + URLEncoder.encode(keyword, "utf8") +
+                    "&location=" + lat + "," + lng +
+                    "&radius=" + radius;
+            URL url = new URL(sb);
             conn = (HttpURLConnection) url.openConnection();
             InputStreamReader in = new InputStreamReader(conn.getInputStream());
-
             int read;
             char[] buff = new char[1024];
             while ((read = in.read(buff)) != -1) {
@@ -126,7 +120,7 @@ public class PlacesService {
             JSONArray predsJsonArray = jsonObj.getJSONArray("results");
 
             // Extract the Place descriptions from the results
-            resultList = new ArrayList<Place>(predsJsonArray.length());
+            resultList = new ArrayList<>(predsJsonArray.length());
             for (int i = 0; i < predsJsonArray.length(); i++) {
                 Place place = new Place();
                 place.reference = predsJsonArray.getJSONObject(i).getString("reference");
@@ -144,14 +138,12 @@ public class PlacesService {
         HttpURLConnection conn = null;
         StringBuilder jsonResults = new StringBuilder();
         try {
-            StringBuilder sb = new StringBuilder(PLACES_API_BASE);
-            sb.append(TYPE_DETAILS);
-            sb.append(OUT_JSON);
-            sb.append("?sensor=false");
-            sb.append("&key=" + API_KEY);
-            sb.append("&reference=" + URLEncoder.encode(reference, "utf8"));
-
-            URL url = new URL(sb.toString());
+            String sb = PLACES_API_BASE + TYPE_DETAILS +
+                    OUT_JSON +
+                    "?sensor=false" +
+                    "&key=" + API_KEY +
+                    "&reference=" + URLEncoder.encode(reference, "utf8");
+            URL url = new URL(sb);
             conn = (HttpURLConnection) url.openConnection();
             InputStreamReader in = new InputStreamReader(conn.getInputStream());
 
