@@ -70,16 +70,16 @@ public class Profile {
         return preferences;
     }
 
-    public Boolean containsPreferences(Profile person) {
-        for (String p1 : person.preferences) {
-            for (String p2 : getPreferences()) {
-                if (p1.equals(p2)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
+//    public Boolean containsPreferences(Profile person) {
+//        for (String p1 : person.preferences) {
+//            for (String p2 : getPreferences()) {
+//                if (p1.equals(p2)) {
+//                    return true;
+//                }
+//            }
+//        }
+//        return false;
+//    }
 
     public String getPeople() {
         StringBuilder string = new StringBuilder();
@@ -94,9 +94,11 @@ public class Profile {
         StringBuilder string = new StringBuilder();
         String s = this.name;
         String s1 = "";
+
         for (int i = 0; i<this.preferences.size(); i++) {
-            s1 = preferences.get(i) + "\n";
+            s1 = s1 + preferences.get(i) + "\n";
         }
+
         string.append(s + "\n\n");
         string.append("Your Preferences:\n");
         string.append(s1 + "\n");
