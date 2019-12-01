@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -28,12 +29,19 @@ public class Main extends Application{
     private static ArrayList<String> preferences = new ArrayList<String>() {{add("Sushi");
                                                                 add("pizza");}};
     private static Profile user = new Profile("Prestonmlo", "Preston Lo", "prestonmlo@gmail.com", "pmoney", preferences);
+    private static Profile user1 = new Profile("Matt1", "Matt Lo", "Mattlo@gmail.com", "pmoney", preferences);
+    private static Profile user2 = new Profile("Pat1", "Pat Chan", "Patchan@gmail.com", "pmoney", preferences);
+    private static Profile user3 = new Profile("danny1", "Danny Lo", "dannylo@gmail.com", "pmoney", preferences);
 
 
 
     public static void main(String[] args){
         ProfileList = new ArrayList<>();
         ProfileList.add(user);
+        ProfileList.add(user1);
+        ProfileList.add(user2);
+        ProfileList.add(user3);
+
         launch(args);
         menu(ProfileList);
     }
@@ -120,30 +128,57 @@ public class Main extends Application{
     private GridPane profilePane(){
         GridPane pane = new GridPane();
         pane.add(profile(), 0, 0, 1, 1);
-        pane.add(food(), 1, 0, 1,1);
-        pane.add(people(),2,0,2,1);
+        pane.add(people(), 1, 0, 1,1);
+        pane.add(food(),2,0,2,1);
         return pane;
     }
 
     private HBox profile(){
+        TextArea profile = new TextArea(getProfile());
+        profile.setPrefSize(400, 400);
 
-
-        HBox pane = new HBox();
+        HBox pane = new HBox(profile);
+        pane.setPadding(new Insets(400, 30, 5, 50));
+        pane.setSpacing(30);
         return pane;
     }
 
     private HBox food(){
+        TextArea food = new TextArea("map");
+        food.setPrefSize(400, 400);
 
 
-        HBox pane = new HBox();
+        HBox pane = new HBox(food);
+        pane.setPadding(new Insets(400, 20, 5, 55));
+        pane.setSpacing(30);
         return pane;
     }
 
     private HBox people(){
+        TextArea profile = new TextArea(getPeople());
+        profile.setPrefSize(400, 400);
 
-        
-        HBox pane = new HBox();
+        HBox pane = new HBox(profile);
+        pane.setPadding(new Insets(400, 30, 5, 40));
+        pane.setSpacing(30);
         return pane;
+    }
+
+    private String getProfile() {
+        return user.getUser();
+    }
+
+    private String getPeople() {
+        StringBuilder s = new StringBuilder();
+
+        for (int i = 0; i < ProfileList.size(); i++) {
+            if (user != ProfileList.get(i)) {
+                String s1 = ProfileList.get(i).getPeople() + "\n";
+                s.append(s1).toString();
+            }
+        }
+
+        return s.toString();
     }
 
 
