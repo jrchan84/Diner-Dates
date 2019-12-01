@@ -31,7 +31,7 @@ public class Profile {
         String s = this.name;
         String s1 = "";
         for (int i = 0; i<this.preferences.size(); i++) {
-            s1 = preferences.get(i) + "\n";
+            s1 = s1 + preferences.get(i) + "\n";
         }
         string.append(s + "\n\n");
         string.append("Your Preferences:\n");

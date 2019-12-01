@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -147,6 +148,7 @@ public class Main extends Application{
         TextArea food = new TextArea("map");
         food.setPrefSize(400, 400);
 
+        Image map = new Image(
 
         HBox pane = new HBox(food);
         pane.setPadding(new Insets(400, 20, 5, 55));
