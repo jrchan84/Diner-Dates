@@ -15,7 +15,11 @@ import main.model.Place;
 import main.model.PlacesService;
 import main.model.Profile;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -130,7 +134,13 @@ public class Main extends Application {
 
         Button loginButton = new Button("login");
         loginButton.setPrefSize(100,40);
-        loginButton.setOnAction(e -> loginClick());
+        loginButton.setOnAction(e -> {
+            try {
+                loginClick();
+            } catch (MalformedURLException e1) {
+                e1.printStackTrace();
+            }
+        });
 
         HBox box = new HBox();
         box.setPrefHeight(100);
@@ -141,7 +151,7 @@ public class Main extends Application {
         return box;
     }
 
-    private void loginClick() {
+    private void loginClick() throws MalformedURLException {
         Screen screen2 = Screen.getPrimary();
         javafx.geometry.Rectangle2D bounds2 = screen2.getVisualBounds();
         stage.setX(bounds2.getMinX());
@@ -174,7 +184,7 @@ public class Main extends Application {
     }
 
 
-    private GridPane profilePane(){
+    private GridPane profilePane() throws MalformedURLException {
         GridPane pane = new GridPane();
         pane.add(profile(), 0, 0, 1, 1);
         pane.add(people(), 1, 0, 1,1);
@@ -192,12 +202,12 @@ public class Main extends Application {
         return pane;
     }
 
-    private HBox food(){
+    private HBox food() throws IOException {
 
         PlacesService PS = new PlacesService();
         String s = "sushi";
         ArrayList<Place> restaurants;
-        restaurants = PlacesService.search(s, 49.2827,-123.1207,3000);
+        restaurants = PS.search(s, 49.2827,-123.1207,3000);
         ArrayList<String> foodArray = new ArrayList<>();
         for (Place p: restaurants) {
             foodArray.add(p.name);
@@ -209,6 +219,9 @@ public class Main extends Application {
             string.append(s1);
         }
 
+        URL url = new URL(PS.address);
+        BufferedImage c = ImageIO.read(url);
+        ImageIco
         TextArea food = new TextArea(string.toString());
         food.setPrefSize(400, 400);
 
