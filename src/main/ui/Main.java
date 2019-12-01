@@ -111,7 +111,7 @@ public class Main extends Application{
         StackPane menu2 = new StackPane();
         menu2.setStyle("-fx-background-image: url(file:background2.png); "
                 + "-fx-background-size: cover;");
-        menu2.getChildren().addAll(profilePane(), peoplePane(), foodPane());
+        menu2.getChildren().addAll(profilePane());
 
         mainPage = new Scene(menu2);
         stage.setScene(mainPage);
@@ -119,16 +119,31 @@ public class Main extends Application{
 
     private GridPane profilePane(){
         GridPane pane = new GridPane();
-        HBox box = new HBox();
-        return
+        pane.add(profile(), 0, 0, 1, 1);
+        pane.add(food(), 1, 0, 1,1);
+        pane.add(people(),2,0,2,1);
+        return pane;
     }
 
-    private GridPane foodPane(){
-        return null;
+    private HBox profile(){
+
+
+        HBox pane = new HBox();
+        return pane;
     }
 
-    private GridPane peoplePane(){
-        return null;
+    private HBox food(){
+
+
+        HBox pane = new HBox();
+        return pane;
+    }
+
+    private HBox people(){
+
+        
+        HBox pane = new HBox();
+        return pane;
     }
 
 
