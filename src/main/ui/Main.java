@@ -11,6 +11,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import main.model.Place;
+import main.model.PlacesService;
 import main.model.Profile;
 
 import java.io.IOException;
@@ -191,10 +193,24 @@ public class Main extends Application {
     }
 
     private HBox food(){
-        TextArea food = new TextArea("map");
+
+        PlacesService PS = new PlacesService();
+        String s = "sushi";
+        ArrayList<Place> restaurants;
+        restaurants = PlacesService.search(s, 49.2827,-123.1207,3000);
+        ArrayList<String> foodArray = new ArrayList<>();
+        for (Place p: restaurants) {
+            foodArray.add(p.name);
+        }
+
+        StringBuilder string = new StringBuilder();
+        for (int i = 0; i< foodArray.size(); i++) {
+            String s1 = foodArray.get(i) + "\n";
+            string.append(s1);
+        }
+
+        TextArea food = new TextArea(string.toString());
         food.setPrefSize(400, 400);
-
-
 
         HBox pane = new HBox(food);
         pane.setPadding(new Insets(400, 20, 5, 55));

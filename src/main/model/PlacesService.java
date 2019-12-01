@@ -30,6 +30,8 @@ public class PlacesService {
     // KEY!
     private static final String API_KEY = "AIzaSyCqY6ZWUzNOksYLI0c3FBdOYU4xEDIVorc";
 
+    public static String address;
+
     public static ArrayList<Place> autocomplete(String input) {
         ArrayList<Place> resultList = null;
 
@@ -94,6 +96,7 @@ public class PlacesService {
                     "&keyword=" + URLEncoder.encode(keyword, "utf8") +
                     "&location=" + lat + "," + lng +
                     "&radius=" + radius;
+            address = sb;
             URL url = new URL(sb);
             conn = (HttpURLConnection) url.openConnection();
             InputStreamReader in = new InputStreamReader(conn.getInputStream());
