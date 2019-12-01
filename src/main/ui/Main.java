@@ -195,6 +195,7 @@ public class Main extends Application {
         food.setPrefSize(400, 400);
 
 
+
         HBox pane = new HBox(food);
         pane.setPadding(new Insets(400, 20, 5, 55));
         pane.setSpacing(30);
@@ -219,7 +220,7 @@ public class Main extends Application {
         StringBuilder s = new StringBuilder();
 
         for (int i = 0; i < ProfileList.size(); i++) {
-            if (user1 != ProfileList.get(i)) {
+            if (user1 != ProfileList.get(i) && user1.containsPreferences(ProfileList.get(i))) {
                 String s1 = ProfileList.get(i).getPeople() + "\n";
                 s.append(s1).toString();
             }

@@ -70,6 +70,17 @@ public class Profile {
         return preferences;
     }
 
+    public Boolean containsPreferences(Profile person) {
+        for (String p1 : person.preferences) {
+            for (String p2 : getPreferences()) {
+                if (p1.equals(p2)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public String getPeople() {
         StringBuilder string = new StringBuilder();
         String s = this.name;
